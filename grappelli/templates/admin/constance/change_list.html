@@ -50,6 +50,16 @@
 
 {% block content %}
     <form id="grp-changelist-form" action="" method="post">{% csrf_token %}
+      {% for field in form.hidden_fields %}
+        {% if form.errors %}
+          <ul class="grp-messagelist">
+            {% for error in field.errors %}
+              <li class="grp-error">{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        {{ field }}
+      {% endfor %}
         <section id="grp-changelist" class="grp-editable">
             <header style="display:none"><h1>Results</h1></header>
                 <div class="grp-module grp-changelist-results">
